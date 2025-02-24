@@ -8,6 +8,7 @@ const { srcPath, distPath } = require('./paths')
 module.exports = smart(webpackBaseConfig, {
   mode: 'production',
   output: {
+    // [name]: 多入口打包时必须这样写成动态获取值，对应就是entry的 key 值
     filename: '[name].[contentHash:8].js',
     path: distPath
   },
