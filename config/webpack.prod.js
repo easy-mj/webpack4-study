@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const webpackBaseConfig = require('./webpack.base.js')
 const { smart } = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const { srcPath, distPath } = require('./paths')
 
 module.exports = smart(webpackBaseConfig, {
@@ -28,6 +30,15 @@ module.exports = smart(webpackBaseConfig, {
             }
         }
       },
+      // 抽离 css 样式文件
+      {
+        test: /\.css$/,
+        use: [
+          // 注意，这里将 style-loader 替换为 MiniCssExtractPlugin.loader
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ]
+      }
     ]
   },
   plugins: [
@@ -35,6 +46,17 @@ module.exports = smart(webpackBaseConfig, {
     new webpack.DefinePlugin({
       // 通过 window.APP_ENV 可以访问到该环境变量
       APP_ENV: JSON.stringify('production')
+    }),
+
+    // 抽离 css 样式文件
+    new MiniCssExtractPlugin({
+      filename: 'css/main.[contentHash:8].css'
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      // 压缩抽离出的 css 代码文件
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  }
 })

@@ -12,6 +12,10 @@ module.exports = smart(webpackBaseConfig, {
       {
         test: /\.(png|jpg|jpeg|gif)$/,
         use: 'file-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: ['style-loader', 'css-loader']
       }
     ]
   },
