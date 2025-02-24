@@ -1,4 +1,5 @@
 import "../css/index.css";
+import "../css/index.less";
 
 function insertImg(file) {
   const img = new Image()
