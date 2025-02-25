@@ -6,12 +6,9 @@ function insertImg(file) {
   document.body.appendChild(img)
 }
 
-import computeImg from '../img/compute.png'
-insertImg(computeImg)
+// 图片大小2.36kb
+import icon from '../img/icon.png'
+insertImg(icon)
+
 import personImg from '../img/person.jpeg'
 insertImg(personImg)
-
-var msg = () => {
-  console.log('hello world')
-}
-msg()

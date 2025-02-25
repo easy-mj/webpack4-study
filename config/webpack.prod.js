@@ -19,9 +19,9 @@ module.exports = smart(webpackBaseConfig, {
         use: {
             loader: 'url-loader',
             options: {
-                // 小于 50kb 的图片用 base64 格式产出
+                // 小于 3kb 的图片用 base64 格式产出
                 // 否则，依然延用 file-loader 的形式，产出 url 格式
-                limit: 50 * 1024,
+                limit: 3 * 1024,
 
                 // 打包到 img 目录下
                 outputPath: '/img',
