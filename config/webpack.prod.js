@@ -9,7 +9,9 @@ module.exports = smart(webpackBaseConfig, {
   mode: 'production',
   output: {
     filename: '[name].[contentHash:8].js',
-    path: distPath
+    path: distPath,
+    // 修改所有静态文件 url 的前缀
+    publicPath: 'https://pss.bdstatic.com/r/www/cache/static/protocol/https/lib/'
   },
   module: {
     rules: [
@@ -25,6 +27,9 @@ module.exports = smart(webpackBaseConfig, {
 
                 // 打包到 img 目录下
                 outputPath: '/img',
+
+                // 设置图片的CDN地址（也可以统一使用外面output.publicPath配置的地址）
+                publicPath: 'https://bce.bdstatic.com/p3m/common-service/uploads'
             }
         }
       },
