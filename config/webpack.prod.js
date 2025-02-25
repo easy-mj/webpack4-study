@@ -35,6 +35,9 @@ module.exports = smart(webpackBaseConfig, {
     new webpack.DefinePlugin({
       // 通过 window.APP_ENV 可以访问到该环境变量
       APP_ENV: JSON.stringify('production')
-    })
+    }),
+
+    // 忽略 moment 下的 /local 目录
+    new webpack.IgnorePlugin(/\.\/locale/, /moment/)
   ]
 })
