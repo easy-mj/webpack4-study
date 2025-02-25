@@ -2,10 +2,15 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackBaseConfig = require('./webpack.base')
 const { smart } = require('webpack-merge')
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin')
 const { srcPath, distPath } = require('./paths')
 
 module.exports = smart(webpackBaseConfig, {
   mode: 'development',
+  resolve: {
+    // 针对Npm中的第三方模块优先采用 jsnext:main 中指向的 ES6 模块化语法的文件
+    mainFields: ['jsnext:main', 'browser', 'main']
+  },
   module: {
     rules: [
       // 直接引入图片 url
@@ -16,10 +21,8 @@ module.exports = smart(webpackBaseConfig, {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      // 通过 window.APP_ENV 可以访问到该环境变量
-      APP_ENV: JSON.stringify('developement')
-    })
+    // 开启 Scope Hosting
+    new ModuleConcatenationPlugin()
   ],
   devServer: {
     port: 8080,
