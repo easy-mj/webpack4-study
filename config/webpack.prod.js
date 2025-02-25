@@ -8,7 +8,8 @@ const { srcPath, distPath } = require('./paths')
 module.exports = smart(webpackBaseConfig, {
   mode: 'production',
   output: {
-    filename: '[name].[contentHash:8].js',
+    // 使用内容hash，只有文件内容发生改变才会生成新的hash，最大限度的命中缓存
+    filename: '[name].[contentHash:8].js', // name即多入口时 entry 的 key 值
     path: distPath
   },
   module: {
