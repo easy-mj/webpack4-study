@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const webpackBaseConfig = require('./webpack.base.js')
 const { smart } = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const { srcPath, distPath } = require('./paths')
 
 module.exports = smart(webpackBaseConfig, {
@@ -35,6 +36,25 @@ module.exports = smart(webpackBaseConfig, {
     new webpack.DefinePlugin({
       // 通过 window.APP_ENV 可以访问到该环境变量
       APP_ENV: JSON.stringify('production')
+    }),
+
+    // 使用 ParallelUglifyPlugin 多进程并行压缩输出的JS代码
+    new ParallelUglifyPlugin({
+      // 传递给 UglifyPlugin 的参数，还是使用 UglifyJS 压缩，只不过开启了多进程
+      uglifyJS: {
+        output: {
+          beautify: false, // 最紧凑的输出
+          comments: false, // 删除所有的注释
+        },
+        compress: {
+          // 删除所有的 console 语句，可以兼容 IE 浏览器
+          drop_console: true,
+          // 内嵌定义了但是只用到一次的变量
+          collapse_vars: true,
+          // 提取出来出现多次但是没有定义成变量去引用的静态值
+          reduce_vars: true,
+        }
+      }
     })
   ]
 })
