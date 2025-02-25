@@ -15,3 +15,10 @@ var msg = () => {
   console.log('hello world')
 }
 msg()
+
+// 引入动态数据，通过 import 函数实现懒加载
+setTimeout(() => {
+  import('./big-data.js').then(res => {
+    console.log(res.default.info)
+  })
+}, 2000)
