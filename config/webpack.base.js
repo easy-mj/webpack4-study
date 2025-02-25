@@ -7,6 +7,11 @@ module.exports = {
     index: path.join(srcPath, 'js', 'index')
   },
   module: {
+    /**
+     * 独立完整的 [jquery|lodash].min.js 文件就没有采用模块化
+     * 忽略对 [jquery|lodash].min.js 文件的递归解析处理
+     */
+    noParse: /jquery|lodash/, // 使用正则表达式匹配不需要解析的模块,
     rules: [
       {
         test: /\.js$/,
