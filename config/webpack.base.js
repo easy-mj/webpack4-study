@@ -4,7 +4,7 @@ const { srcPath, distPath } = require('./paths')
 
 module.exports = {
   entry: {
-    index: path.join(srcPath, 'js', 'index')
+    index: path.join(srcPath, 'index')
   },
   module: {
     rules: [

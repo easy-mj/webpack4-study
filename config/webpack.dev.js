@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const webpackBaseConfig = require('./webpack.base')
 const { smart } = require('webpack-merge')
 const { srcPath, distPath } = require('./paths')
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
 
 module.exports = smart(webpackBaseConfig, {
   mode: 'development',
@@ -19,6 +20,11 @@ module.exports = smart(webpackBaseConfig, {
     new webpack.DefinePlugin({
       // 通过 window.APP_ENV 可以访问到该环境变量
       APP_ENV: JSON.stringify('developement')
+    }),
+
+    // 使用动态链接库
+    new DllReferencePlugin({
+      manifest: require(path.join(distPath, 'react.manifest.json'))
     })
   ],
   devServer: {
