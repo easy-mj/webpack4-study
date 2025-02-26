@@ -42,15 +42,7 @@
 
 > 8、DllPlugin
 
-总结：
-
-- 适用生产环境：`优化babel-loader`、`IgnorePlugin`、`noParse`、`happyPack`、`ParallelUglifyPlugin`
-- 适用非生产环境：`自动刷新`、`热更新`、`DllPlugin`
-
 ## 优化产出代码
-
-好处：体积更小；合理分包，不重复加载；速度更快，内存使用更少；
-
 
 > 1、使用生产环境模式
 
