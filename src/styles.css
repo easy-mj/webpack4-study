@@ -1,0 +1,7 @@
+/* src/styles.css */
+.example {
+  display: flex;
+  transition: all .5s;
+  transition: tranformX(-10px);
+  user-select: none;
+}

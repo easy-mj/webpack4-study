@@ -1,0 +1,17 @@
+{
+  "name": "postcss-prefixy",
+  "version": "1.0.0",
+  "description": "postcss prefix",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss src/styles.css -o dist/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.0"
+  }
+}

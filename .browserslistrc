@@ -1,0 +1,4 @@
+# 每个浏览器的最后两个版本/全球使用率超过 1% 的浏览器/支持 Internet Explorer 11 及以上版本
+last 2 versions
+> 1%
+ie >= 11
